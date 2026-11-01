@@ -1,28 +1,36 @@
-import Message from "./Message";
 
 function NoteStatus({ notes }) {
-  // dervied state :
-  const allNotes = notes.length;
-  const completedNotes = notes.filter((n) => n.completed).length;
-  const unCompletedNotes = allNotes - completedNotes;
+  const all = notes.length;
 
-  if (!allNotes)
+  const completed = notes.filter(
+    (note) => note.completed
+  ).length;
+
+  const pending = all - completed;
+
+  if (all === 0) {
     return (
-      <Message>
-        ℹ️ <span>No Notes has already been added.</span> <span>🧐</span>
-      </Message>
+      <p className="note-status__empty">
+        هنوز یادداشتی اضافه نکرده‌اید.
+      </p>
     );
+  }
 
   return (
     <ul className="note-status">
       <li>
-        All <span>{allNotes}</span>
+        کل یادداشت‌ها:
+        <span>{all}</span>
       </li>
+
       <li>
-        Completed <span>{completedNotes}</span>
+        انجام‌شده:
+        <span>{completed}</span>
       </li>
+
       <li>
-        Open <span>{unCompletedNotes}</span>
+        در انتظار انجام:
+        <span>{pending}</span>
       </li>
     </ul>
   );

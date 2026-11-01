@@ -1,103 +1,468 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+/* =========================
+   1. تنظیمات عمومی
+========================= */
+
+:root {
+  font-family: Tahoma, Arial, sans-serif;
+  color: #273044;
+  background: #f5f6fa;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --primary: #6c63e8;
+  --primary-hover: #574fd0;
+  --text-main: #273044;
+  --text-muted: #858b9b;
+  --border: #e9eaf0;
+  --surface: #ffffff;
+  --background: #f5f6fa;
+  --danger: #e45d6b;
+  --success: #27a879;
 }
 
-.note-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  margin-bottom: 3rem;
-  border-bottom: 1px solid var(--text-400);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  direction: rtl;
+  background: var(--background);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 0;
+  text-align: right;
+}
+
+/* =========================
+   2. ساختار اصلی
+========================= */
+
+.container {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  padding: 2.5rem 0;
+  direction: rtl;
 }
 
 .note-app {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-}
-
-.note-form {
-  gap: 1.5rem;
   display: grid;
-}
-
-.add-new-note {
-  width: 30%;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
 }
 
 .note-container {
-  width: 60%;
+  min-width: 0;
 }
+
+/* =========================
+   3. هدر برنامه
+========================= */
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.note-header__title h1 {
+  font-size: 1.8rem;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.note-header__title span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.note-header__sort {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.note-header__sort label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.note-header__sort select {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--surface);
+  color: var(--text-main);
+  outline: none;
+  cursor: pointer;
+}
+
+/* =========================
+   4. فرم افزودن یادداشت
+========================= */
+
+.add-new-note {
+  width: 100%;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(30, 40, 70, 0.04);
+}
+
+.add-new-note h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+}
+
+.note-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.text-field {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: #fafbfe;
+  color: var(--text-main);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.text-field::placeholder {
+  color: #a1a6b3;
+}
+
+.text-field:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(108, 99, 232, 0.1);
+}
+
+textarea.text-field {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.8;
+}
+
+.btn {
+  border: none;
+  border-radius: 0.65rem;
+  padding: 0.9rem 1rem;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn--primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn--primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn--primary:active {
+  transform: scale(0.98);
+}
+
+/* =========================
+   5. وضعیت یادداشت‌ها
+========================= */
 
 .note-status {
   display: flex;
-  justify-content: space-between;
-  color: var(--text-400);
-  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+}
+
+.note-status li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
 }
 
 .note-status span {
-  border-radius: 2rem;
-  display: inline-block;
-  background-color: var(--text-400);
-  padding: 0.2rem 0.3rem;
-  font-size: 0.75rem;
-  color: var(--text-100);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 27px;
+  height: 27px;
+  padding: 0 0.4rem;
+  border-radius: 50%;
+  background: #eeedff;
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.note-status__empty,
+.note-list__empty {
+  color: var(--text-muted);
+  background: var(--surface);
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  text-align: center;
+}
+
+/* =========================
+   6. لیست یادداشت‌ها
+========================= */
+
+.note-list {
+  display: grid;
+  gap: 1rem;
 }
 
 .note-item {
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 0.75rem;
-  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  box-shadow: 0 3px 12px rgba(30, 40, 70, 0.03);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.note-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(30, 40, 70, 0.07);
 }
 
 .note-item__header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding-bottom: 0.3rem;
-  margin-bottom: 0.3rem;
-  border-bottom: 1px solid var(--text-100);
+  align-items: flex-start;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.note-item__content {
+  min-width: 0;
+  flex: 1;
+}
+
+.note-item .title {
+  font-size: 1.05rem;
+  color: var(--text-main);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  overflow-wrap: anywhere;
+}
+
+.note-item .desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.7rem;
+  overflow-wrap: anywhere;
+}
+
+.note-text {
+  color: #535c70;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.note-item.completed {
+  background: #f9fbfa;
 }
 
 .note-item.completed .title {
   text-decoration: line-through;
+  color: var(--text-muted);
 }
 
-.note-item.completed {
-  opacity: 80%;
+.note-item.completed .note-text {
+  color: var(--text-muted);
 }
 
-.note-item__header .title {
-  font-size: 1.1rem;
-  color: var(--text-700);
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-}
+/* =========================
+   7. دکمه‌های عملیات
+========================= */
 
-.note-item__header .desc {
-  color: var(--text-400);
-  margin-bottom: 0.5rem;
-  font-weight: 300;
-}
-
-.note-item__header .actions {
+.note-item .actions {
   display: flex;
-  gap: 1.5rem;
   align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
 }
 
-.note-item__header .trash {
-  width: 1.5rem;
-  height: 1.5rem;
-  color: var(--rose-500);
-  background: none;
+.note-item .actions button {
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  color: var(--danger);
+  padding: 0.3rem;
+  transition: transform 0.2s;
 }
+
+.note-item .actions button:hover {
+  transform: scale(1.15);
+}
+
+.note-item .actions input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--success);
+  cursor: pointer;
+}
+
+/* =========================
+   8. تاریخ یادداشت
+========================= */
 
 .note-item__footer {
-  color: var(--text-300);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* =========================
+   9. دسترس‌پذیری
+========================= */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+/* =========================
+   10. واکنش‌گرایی
+========================= */
+
+@media (max-width: 768px) {
+  .container {
+    width: 94%;
+    padding: 1.5rem 0;
+  }
+
+  .note-app {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .note-header {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+
+  .note-header__title h1 {
+    font-size: 1.5rem;
+  }
+
+  .note-header__sort {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .note-header__sort select {
+    flex: 1;
+    max-width: 220px;
+  }
+
+  .note-status {
+    gap: 0.8rem;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 92%;
+  }
+
+  .add-new-note {
+    padding: 1.1rem;
+  }
+
+  .note-item {
+    padding: 1rem;
+  }
+
+  .note-item__header {
+    gap: 0.5rem;
+  }
+
+  .note-item .actions {
+    gap: 0.5rem;
+  }
+
+  .note-status {
+    font-size: 0.8rem;
+  }
+}
+.app-footer {
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #e5e7eb;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.app-footer strong {
+  color: #334155;
+}
+
+.app-footer span {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+}
+.btn--cancel {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.btn--cancel:hover {
+  background-color: #d1d5db;
 }

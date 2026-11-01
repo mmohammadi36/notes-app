@@ -1,15 +1,36 @@
 
 function NoteHeader({ notes, sortBy, onSort }) {
-
   return (
-    <div className="note-header">
-      <h1>My Notes ({notes.length})</h1>
-      <select value={sortBy} onChange={onSort}>
-        <option value="latest">Sort based on latest notes</option>
-        <option value="earliest">Sort based on earliest notes</option>
-        <option value="completed">Sort based on completed notes</option>
-      </select>
-    </div>
+ <header className="note-header">
+      <div className="note-header__title">
+        <h1>یادداشت‌های من</h1>
+        <span>تعداد یادداشت‌ها: {notes.length}</span>
+      </div>
+
+      <div className="note-header__sort">
+        <label htmlFor="sort-notes">
+          مرتب‌سازی:
+        </label>
+
+        <select
+          id="sort-notes"
+          value={sortBy}
+          onChange={onSort}
+        >
+          <option value="latest">
+            جدیدترین یادداشت‌ها
+          </option>
+
+          <option value="earliest">
+            قدیمی‌ترین یادداشت‌ها
+          </option>
+
+          <option value="completed">
+            ابتدا انجام‌نشده‌ها
+          </option>
+        </select>
+      </div>
+    </header>
   );
 }
 

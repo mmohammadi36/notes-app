@@ -1,66 +1,82 @@
-function NoteList({ notes, onDelete, onComplete, sortBy }) {
-  
-  let sortedNotes = notes;
-  if (sortBy === "earliest")
-    sortedNotes = [...notes].sort(
-      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-    ); // a -b  => a > b ? 1 : -1
 
-  if (sortBy === "latest")
-    sortedNotes = [...notes].sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    ); // b -a  => a > b ? -1 : 1
-
-  if (sortBy === "completed")
-    sortedNotes = [...notes].sort(
-      (a, b) => Number(a.completed) - Number(b.completed)
+function NoteList({ notlist, onDelete, onCompleted, onEdit }) {
+  if (notlist.length === 0) {
+    return (
+      <p className="note-list__empty">
+        یادداشتی برای نمایش وجود ندارد.
+      </p>
     );
+  }
 
   return (
     <div className="note-list">
-      {sortedNotes.map((note) => (
+      {notlist.map((note) => (
         <NoteItem
           key={note.id}
           note={note}
           onDelete={onDelete}
-          onComplete={onComplete}
+          onCompleted={onCompleted}
+          onEdit={onEdit}
         />
       ))}
     </div>
   );
 }
 
-export default NoteList;
-
-function NoteItem({ note, onDelete, onComplete }) {
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
+function NoteItem({ note, onDelete, onCompleted, onEdit }) {
+  const formattedDate = note.createdAt
+    ? new Date(note.createdAt).toLocaleDateString("fa-IR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "تاریخ نامشخص";
 
   return (
-    <div className={`note-item ${note.completed ? "completed" : ""}`}>
+    <article className={`note-item ${note.completed ? "completed" : ""}`}>
       <div className="note-item__header">
-        <div>
-          <p className="title">{note.title}</p>
+        <div className="note-item__content">
+          <h3 className="title">{note.title}</h3>
           <p className="desc">{note.description}</p>
+          <p className="note-text">{note.text}</p>
         </div>
+
         <div className="actions">
-          <button onClick={() => onDelete(note.id)}>❌</button>
-          <input
-            type="checkbox"
-            name={note.id}
-            id={note.id}
-            value={note.id}
-            checked={note.completed}
-            onChange={onComplete}
-          />
+          <button
+            type="button"
+            onClick={() => onEdit(note)}
+            aria-label={`ویرایش یادداشت ${note.title}`}
+            title="ویرایش یادداشت"
+          >
+            ✏️
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onDelete(note.id)}
+            aria-label={`حذف یادداشت ${note.title}`}
+            title="حذف یادداشت"
+          >
+            🗑️
+          </button>
+
+          <label>
+            <input
+              type="checkbox"
+              checked={Boolean(note.completed)}
+              onChange={() => onCompleted(note.id)}
+              aria-label={`تغییر وضعیت ${note.title}`}
+            />
+            <span className="sr-only">انجام شد</span>
+          </label>
         </div>
       </div>
-      <p className="note-item__footer">
-        {new Date(note.createdAt).toLocaleDateString("en-US", options)}
-      </p>
-    </div>
+
+      <div className="note-item__footer">
+        <span>{formattedDate}</span>
+      </div>
+    </article>
   );
 }
+
+export default NoteList;
