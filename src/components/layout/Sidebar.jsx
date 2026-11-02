@@ -8,21 +8,49 @@ import {
 } from "@heroicons/react/24/outline";
 
 const menuItems = [
-  { id: "dashboard", title: "داشبورد", icon: HomeIcon },
-  { id: "planner", title: "برنامه‌ریز", icon: CalendarDaysIcon },
-  { id: "notes", title: "یادداشت‌ها", icon: DocumentTextIcon },
-  { id: "focus", title: "تمرکز و تایمر", icon: ClockIcon },
-  { id: "progress", title: "آمار و پیشرفت", icon: ChartBarIcon },
+  {
+    id: "dashboard",
+    title: "داشبورد",
+    icon: HomeIcon,
+    color: "purple",
+  },
+  {
+    id: "planner",
+    title: "برنامه‌ریز",
+    icon: CalendarDaysIcon,
+    color: "orange",
+  },
+  {
+    id: "notes",
+    title: "یادداشت‌ها",
+    icon: DocumentTextIcon,
+    color: "teal",
+  },
+  {
+    id: "focus",
+    title: "تمرکز و تایمر",
+    icon: ClockIcon,
+    color: "pink",
+  },
+  {
+    id: "progress",
+    title: "آمار و پیشرفت",
+    icon: ChartBarIcon,
+    color: "blue",
+  },
 ];
 
 function Sidebar({ activePage, onPageChange }) {
   return (
     <aside className="sidebar">
       <div className="sidebar__brand">
-        <div className="sidebar__logo">ر</div>
-        <div>
+      <div className="sidebar__logo">
+  <CalendarDaysIcon />
+</div>
+
+        <div className="sidebar__brand-text">
           <h2>روزنگار</h2>
-          <span>مدیریت روزانه</span>
+          <span>هر روز، یک قدم به جلو</span>
         </div>
       </div>
 
@@ -37,12 +65,15 @@ function Sidebar({ activePage, onPageChange }) {
               <button
                 key={item.id}
                 type="button"
-                className={`sidebar__item ${
+                className={`sidebar__item sidebar__item--${item.color} ${
                   activePage === item.id ? "active" : ""
                 }`}
                 onClick={() => onPageChange(item.id)}
               >
-                <Icon className="sidebar__icon" />
+                <span className="sidebar__icon-wrapper">
+                  <Icon className="sidebar__icon" />
+                </span>
+
                 <span>{item.title}</span>
               </button>
             );

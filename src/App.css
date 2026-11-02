@@ -890,3 +890,160 @@ select:focus-visible {
   border-radius: 20px;
   transition: width 0.3s ease;
 }
+
+/* ===== Rooznegar Sidebar Branding ===== */
+
+.sidebar__brand {
+  gap: 12px;
+}
+
+.sidebar__logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  color: #fff;
+  background: linear-gradient(145deg, #9388f0, #675bd0);
+  border-radius: 16px 16px 16px 6px;
+  box-shadow: 0 7px 18px rgba(112, 99, 218, 0.24);
+}
+
+.sidebar__logo span {
+  font-family: Tahoma, sans-serif;
+  font-size: 29px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.sidebar__logo i {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  width: 7px;
+  height: 7px;
+  background: #f9d88a;
+  border-radius: 50%;
+}
+
+.sidebar__brand-text h2 {
+  margin-bottom: 5px;
+  color: #34334b;
+}
+
+.sidebar__brand-text span {
+  color: #9996ac;
+  font-size: 11px;
+}
+
+/* ===== Colored Menu Icons ===== */
+
+.sidebar__item {
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.sidebar__icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  transition: all 0.2s ease;
+}
+
+.sidebar__icon {
+  width: 21px;
+  height: 21px;
+  stroke-width: 1.8;
+}
+
+/* Dashboard - Purple */
+
+.sidebar__item--purple .sidebar__icon-wrapper {
+  color: #8274df;
+  background: #f0edff;
+}
+
+/* Planner - Orange */
+
+.sidebar__item--orange .sidebar__icon-wrapper {
+  color: #df9b45;
+  background: #fff4e5;
+}
+
+/* Notes - Teal */
+
+.sidebar__item--teal .sidebar__icon-wrapper {
+  color: #45a99c;
+  background: #e8f7f4;
+}
+
+/* Focus - Pink */
+
+.sidebar__item--pink .sidebar__icon-wrapper {
+  color: #df819b;
+  background: #fff0f4;
+}
+
+/* Progress - Blue */
+
+.sidebar__item--blue .sidebar__icon-wrapper {
+  color: #6498d5;
+  background: #edf4ff;
+}
+
+/* Active menu item */
+
+.sidebar__item.active {
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.sidebar__item--purple.active {
+  color: #7567d5;
+  background: #f0edff;
+}
+
+.sidebar__item--orange.active {
+  color: #c58532;
+  background: #fff4e5;
+}
+
+.sidebar__item--teal.active {
+  color: #368f84;
+  background: #e8f7f4;
+}
+
+.sidebar__item--pink.active {
+  color: #cf6f8b;
+  background: #fff0f4;
+}
+
+.sidebar__item--blue.active {
+  color: #5485c2;
+  background: #edf4ff;
+}
+
+.sidebar__item.active .sidebar__icon-wrapper {
+  background: rgba(255, 255, 255, 0.75);
+  transform: scale(1.04);
+}
+
+.sidebar__item:not(.active):hover {
+  background: #f8f7fc;
+  border-radius: 12px;
+}
+
+.sidebar__item:hover .sidebar__icon-wrapper {
+  transform: translateY(-2px);
+}
+.sidebar__logo svg {
+  width: 25px;
+  height: 25px;
+  color: white;
+}
