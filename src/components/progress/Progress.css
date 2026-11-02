@@ -1,0 +1,141 @@
+
+.progress-page {
+  width: 100%;
+  direction: rtl;
+}
+
+.progress-summary,
+.progress-section {
+  background: #fff;
+  border: 1px solid #eee8f8;
+  border-radius: 20px;
+  padding: 24px;
+  margin: 24px 0;
+}
+
+.progress-summary {
+  background: linear-gradient(135deg, #f8f4fc, #fff);
+}
+
+.progress-summary-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: #66547f;
+}
+
+.progress-summary-info strong {
+  color: #8063b5;
+  font-size: 22px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 11px;
+  background: #eee9f5;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #a78bce;
+  border-radius: 20px;
+  transition: width 0.4s ease;
+}
+
+.overall-fill {
+  background: #8063b5;
+}
+
+.progress-summary > p {
+  color: #897e98;
+  font-size: 13px;
+  margin-top: 14px;
+}
+
+.progress-section h2 {
+  color: #55436e;
+  font-size: 18px;
+  margin: 0 0 20px;
+}
+
+.progress-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.progress-card {
+  background: #faf8fc;
+  border: 1px solid #f0ebf6;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.progress-card span {
+  color: #82758f;
+  font-size: 13px;
+}
+
+.progress-card strong {
+  color: #8063b5;
+  font-size: 28px;
+}
+
+.progress-detail {
+  margin-top: 26px;
+}
+
+.progress-detail .progress-summary-info strong {
+  font-size: 16px;
+}
+
+.progress-message {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px;
+  margin-top: 24px;
+  background: #f7f3fb;
+  border-radius: 16px;
+  color: #76658c;
+  line-height: 1.9;
+  font-size: 14px;
+}
+
+.progress-message span {
+  font-size: 25px;
+}
+
+.progress-message p {
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .progress-cards {
+    gap: 8px;
+  }
+
+  .progress-card {
+    padding: 13px 9px;
+  }
+
+  .progress-card span {
+    font-size: 11px;
+  }
+
+  .progress-card strong {
+    font-size: 23px;
+  }
+
+  .progress-summary,
+  .progress-section {
+    padding: 17px;
+  }
+}

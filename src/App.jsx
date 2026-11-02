@@ -1,9 +1,17 @@
 
 import { useState, useMemo, useEffect } from "react";
+
+import Dashboard from "./components/dashboard/Dashboard";
+import Planner from "./components/planner/Planner";
+import Focus from "./components/focus/Focus";
+import Progress from "./components/progress/Progress";
+
 import AddNotes from "./components/AddNotes";
 import NoteList from "./components/NoteList";
 import NoteStatus from "./components/NoteStatus";
 import NoteHeader from "./components/NoteHeader";
+import Sidebar from "./components/layout/Sidebar";
+
 import "./App.css";
 
 const STORAGE_KEY = "notes-app-notes";
@@ -21,6 +29,7 @@ function App() {
 
   const [sortBy, setSortBy] = useState("latest");
   const [editingNote, setEditingNote] = useState(null);
+  const [activePage, setActivePage] = useState("dashboard");
 
   useEffect(() => {
     try {
@@ -30,17 +39,14 @@ function App() {
     }
   }, [notes]);
 
-  // افزودن یادداشت جدید
   const handleAddNote = (newNote) => {
     setNotes((prevNotes) => [...prevNotes, newNote]);
   };
 
-  // انتخاب یادداشت برای ویرایش
   const handleEdit = (note) => {
     setEditingNote(note);
   };
 
-  // ذخیره تغییرات یادداشت
   const handleUpdateNote = (updatedNote) => {
     setNotes((prevNotes) =>
       prevNotes.map((note) =>
@@ -53,12 +59,10 @@ function App() {
     setEditingNote(null);
   };
 
-  // لغو ویرایش
   const handleCancelEdit = () => {
     setEditingNote(null);
   };
 
-  // حذف یادداشت
   const handleDelete = (id) => {
     setNotes((prevNotes) =>
       prevNotes.filter((note) => note.id !== id)
@@ -69,7 +73,6 @@ function App() {
     }
   };
 
-  // تغییر وضعیت انجام‌شدن
   const handleCompleted = (noteId) => {
     setNotes((prevNotes) =>
       prevNotes.map((note) =>
@@ -80,7 +83,6 @@ function App() {
     );
   };
 
-  // مرتب‌سازی یادداشت‌ها
   const sortedNotes = useMemo(() => {
     const newNotes = [...notes];
 
@@ -109,39 +111,65 @@ function App() {
   }, [notes, sortBy]);
 
   return (
-    <div className="container">
-      <NoteHeader
-        notes={notes}
-        sortBy={sortBy}
-        onSort={(e) => setSortBy(e.target.value)}
+    <div className="app-layout">
+      <Sidebar
+        activePage={activePage}
+        onPageChange={setActivePage}
       />
 
-      <div className="note-app">
-        <AddNotes
-          onAddNote={handleAddNote}
-          editingNote={editingNote}
-          onUpdateNote={handleUpdateNote}
-          onCancelEdit={handleCancelEdit}
-        />
-
-        <div className="note-container">
-          <NoteStatus notes={notes} />
-
-          <NoteList
-            notlist={sortedNotes}
-            onDelete={handleDelete}
-            onCompleted={handleCompleted}
-            onEdit={handleEdit}
+      <main className="main-content">
+        {activePage === "dashboard" && (
+          <Dashboard
+            notes={notes}
+            onNavigate={setActivePage}
           />
-        </div>
-      </div>
+        )}
 
-      <footer className="app-footer">
-        <p>
-          طراحی و توسعه با ❤️ توسط <strong>مریم محمدی</strong>
-        </p>
-        <span>© 2026 | تمامی حقوق محفوظ است</span>
-      </footer>
+        {activePage === "notes" && (
+          <section className="page-content">
+            <NoteHeader
+              notes={notes}
+              sortBy={sortBy}
+              onSort={(e) => setSortBy(e.target.value)}
+            />
+
+            <div className="note-app">
+              <AddNotes
+                onAddNote={handleAddNote}
+                editingNote={editingNote}
+                onUpdateNote={handleUpdateNote}
+                onCancelEdit={handleCancelEdit}
+              />
+
+              <div className="note-container">
+                <NoteStatus notes={notes} />
+
+                <NoteList
+                  notlist={sortedNotes}
+                  onDelete={handleDelete}
+                  onCompleted={handleCompleted}
+                  onEdit={handleEdit}
+                />
+              </div>
+            </div>
+          </section>
+        )}
+
+        {activePage === "planner" && <Planner />}
+
+        {activePage === "focus" && <Focus />}
+
+        {activePage === "progress" && (
+          <Progress notes={notes} />
+        )}
+
+        <footer className="app-footer">
+          <p>
+            طراحی و توسعه با ❤️ توسط <strong>مریم محمدی</strong>
+          </p>
+          <span>© 2026 | تمامی حقوق محفوظ است</span>
+        </footer>
+      </main>
     </div>
   );
 }
