@@ -1,7 +1,6 @@
 
 import { useState, useMemo, useEffect } from "react";
-
-import Dashboard from "./components/dashboard/Dashboard";
+import Dashboard from "./components/Dashboard/Dashboard";
 import Planner from "./components/planner/Planner";
 import Focus from "./components/focus/Focus";
 import Progress from "./components/progress/Progress";
