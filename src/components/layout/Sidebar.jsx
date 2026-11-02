@@ -5,54 +5,52 @@ import {
   DocumentTextIcon,
   ClockIcon,
   ChartBarIcon,
+  SunIcon,
+  MoonIcon,
 } from "@heroicons/react/24/outline";
 
 const menuItems = [
-  {
-    id: "dashboard",
-    title: "داشبورد",
-    icon: HomeIcon,
-    color: "purple",
-  },
-  {
-    id: "planner",
-    title: "برنامه‌ریز",
-    icon: CalendarDaysIcon,
-    color: "orange",
-  },
-  {
-    id: "notes",
-    title: "یادداشت‌ها",
-    icon: DocumentTextIcon,
-    color: "teal",
-  },
-  {
-    id: "focus",
-    title: "تمرکز و تایمر",
-    icon: ClockIcon,
-    color: "pink",
-  },
-  {
-    id: "progress",
-    title: "آمار و پیشرفت",
-    icon: ChartBarIcon,
-    color: "blue",
-  },
+  { id: "dashboard", title: "داشبورد", icon: HomeIcon, color: "purple" },
+  { id: "planner", title: "برنامه‌ریز", icon: CalendarDaysIcon, color: "orange" },
+  { id: "notes", title: "یادداشت‌ها", icon: DocumentTextIcon, color: "teal" },
+  { id: "focus", title: "تمرکز و تایمر", icon: ClockIcon, color: "pink" },
+  { id: "progress", title: "آمار و پیشرفت", icon: ChartBarIcon, color: "blue" },
 ];
 
-function Sidebar({ activePage, onPageChange }) {
+function Sidebar({
+  activePage,
+  onPageChange,
+  theme,
+  onThemeToggle,
+}) {
+  const isDark = theme === "dark";
+
   return (
     <aside className="sidebar">
-      <div className="sidebar__brand">
-      <div className="sidebar__logo">
-  <CalendarDaysIcon />
-</div>
+<div className="sidebar__brand">
+  <div className="sidebar__logo">
+    <CalendarDaysIcon />
+  </div>
 
-        <div className="sidebar__brand-text">
-          <h2>روزنگار</h2>
-          <span>هر روز، یک قدم به جلو</span>
-        </div>
-      </div>
+  <div className="sidebar__brand-text">
+    <h2>روزنگار</h2>
+    <span>هر روز، یک قدم به جلو</span>
+  </div>
+
+  <button
+    type="button"
+    className="sidebar__theme-button"
+    onClick={onThemeToggle}
+    aria-label={theme === "dark" ? "حالت روشن" : "حالت تاریک"}
+    title={theme === "dark" ? "حالت روشن" : "حالت تاریک"}
+  >
+    {theme === "dark" ? (
+      <SunIcon className="sidebar__theme-icon" />
+    ) : (
+      <MoonIcon className="sidebar__theme-icon" />
+    )}
+  </button>
+</div>
 
       <div className="sidebar__menu">
         <p className="sidebar__label">منوی اصلی</p>
@@ -79,6 +77,24 @@ function Sidebar({ activePage, onPageChange }) {
             );
           })}
         </nav>
+      </div>
+
+      <div className="sidebar__theme">
+        <button
+          type="button"
+          className="sidebar__theme-button"
+          onClick={onThemeToggle}
+        >
+          {isDark ? (
+            <SunIcon className="sidebar__theme-icon" />
+          ) : (
+            <MoonIcon className="sidebar__theme-icon" />
+          )}
+
+          <span>
+            {isDark ? "حالت روشن" : "حالت تاریک"}
+          </span>
+        </button>
       </div>
 
       <div className="sidebar__footer">

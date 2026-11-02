@@ -14,6 +14,7 @@ import Sidebar from "./components/layout/Sidebar";
 import "./App.css";
 
 const STORAGE_KEY = "notes-app-notes";
+const THEME_KEY = "roznegar-theme";
 
 function App() {
   const [notes, setNotes] = useState(() => {
@@ -26,17 +27,27 @@ function App() {
     }
   });
 
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem(THEME_KEY) || "light";
+  });
+
   const [sortBy, setSortBy] = useState("latest");
   const [editingNote, setEditingNote] = useState(null);
   const [activePage, setActivePage] = useState("dashboard");
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-    } catch (error) {
-      console.error("خطا در ذخیره یادداشت‌ها:", error);
-    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
   }, [notes]);
+
+  useEffect(() => {
+    localStorage.setItem(THEME_KEY, theme);
+  }, [theme]);
+
+  const handleThemeToggle = () => {
+    setTheme((prevTheme) =>
+      prevTheme === "light" ? "dark" : "light"
+    );
+  };
 
   const handleAddNote = (newNote) => {
     setNotes((prevNotes) => [...prevNotes, newNote]);
@@ -110,10 +121,12 @@ function App() {
   }, [notes, sortBy]);
 
   return (
-    <div className="app-layout">
+    <div className={`app-layout theme-${theme}`}>
       <Sidebar
         activePage={activePage}
         onPageChange={setActivePage}
+        theme={theme}
+        onThemeToggle={handleThemeToggle}
       />
 
       <main className="main-content">

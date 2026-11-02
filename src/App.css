@@ -1047,3 +1047,287 @@ select:focus-visible {
   height: 25px;
   color: white;
 }
+
+/* =====================================
+   11. Theme Variables
+===================================== */
+
+.app-layout {
+  --background: #f8f7fc;
+  --surface: #ffffff;
+  --text-main: #273044;
+  --text-muted: #858b9b;
+  --border: #e9eaf0;
+
+  color: var(--text-main);
+  background: var(--background);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* =====================================
+   12. Dark Theme
+===================================== */
+
+.app-layout.theme-dark {
+  --background: #171727;
+  --surface: #222236;
+  --text-main: #eeeafa;
+  --text-muted: #aaa6bd;
+  --border: #38364f;
+
+  color: var(--text-main);
+  background: var(--background);
+}
+
+/* Main Layout */
+
+.theme-dark .sidebar {
+  background: #1e1d31;
+  border-color: #343149;
+}
+
+.theme-dark .sidebar__brand {
+  border-color: #343149;
+}
+
+.theme-dark .sidebar__brand h2,
+.theme-dark .page-heading h1,
+.theme-dark .dashboard-progress h2,
+.theme-dark .dashboard-recent h2 {
+  color: #eeeafa;
+}
+
+.theme-dark .sidebar__brand-text span,
+.theme-dark .sidebar__label,
+.theme-dark .sidebar__footer {
+  color: #9994b2;
+}
+
+.theme-dark .sidebar__item {
+  color: #c0bad4;
+}
+
+.theme-dark .sidebar__item:not(.active):hover {
+  background: #302d48;
+}
+
+/* Theme Button */
+
+.sidebar__theme {
+  margin-top: auto;
+  padding: 1rem 0.5rem;
+}
+
+.sidebar__theme-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid #e8e3f4;
+  border-radius: 12px;
+  background: #f7f4ff;
+  color: #7162c9;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.sidebar__theme-button:hover {
+  background: #eeeaff;
+  transform: translateY(-2px);
+}
+
+.sidebar__theme-icon {
+  width: 21px;
+  height: 21px;
+}
+
+.theme-dark .sidebar__theme-button {
+  color: #f2d58b;
+  background: #302d48;
+  border-color: #45405f;
+}
+
+.theme-dark .sidebar__theme-button:hover {
+  background: #3b3657;
+}
+
+/* Headings and Text */
+
+.theme-dark .note-header__title h1,
+.theme-dark .note-item .title {
+  color: var(--text-main);
+}
+
+.theme-dark .note-text {
+  color: #c5c0d4;
+}
+
+.theme-dark .note-item__desc,
+.theme-dark .note-item__footer,
+.theme-dark .note-header__title span {
+  color: var(--text-muted);
+}
+
+/* Notes */
+
+.theme-dark .add-new-note,
+.theme-dark .note-item,
+.theme-dark .note-status__empty,
+.theme-dark .note-list__empty {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-main);
+}
+
+.theme-dark .note-item.completed {
+  background: #252d35;
+}
+
+.theme-dark .text-field {
+  background: #2c2b42;
+  border-color: #45415f;
+  color: #eeeafa;
+}
+
+.theme-dark .text-field::placeholder {
+  color: #9994b2;
+}
+
+.theme-dark .note-header__sort select {
+  background: var(--surface);
+  color: var(--text-main);
+  border-color: var(--border);
+}
+
+.theme-dark .note-status span {
+  background: #383252;
+  color: #b6a9ff;
+}
+
+/* Dashboard */
+
+.theme-dark .dashboard-card,
+.theme-dark .dashboard-progress,
+.theme-dark .dashboard-recent {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.theme-dark .dashboard-card span,
+.theme-dark .dashboard-progress > p {
+  color: var(--text-muted);
+}
+
+.theme-dark .dashboard-welcome {
+  background: linear-gradient(135deg, #302b4b, #242338);
+  border-color: #45405f;
+}
+
+.theme-dark .dashboard-welcome h2,
+.theme-dark .recent-note h3 {
+  color: #eeeafa;
+}
+
+.theme-dark .dashboard-welcome p,
+.theme-dark .recent-note p {
+  color: #aaa6bd;
+}
+
+.theme-dark .recent-note {
+  background: #2c2a41;
+}
+
+.theme-dark .progress-track {
+  background: #39354f;
+}
+
+/* Planner */
+
+.theme-dark .planner-stat,
+.theme-dark .planner-progress {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.theme-dark .planner-stat span,
+.theme-dark .planner-progress-info {
+  color: var(--text-muted);
+}
+
+.theme-dark .planner-progress-track {
+  background: #39354f;
+}
+
+/* Footer */
+
+.theme-dark .app-footer {
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.theme-dark .app-footer strong {
+  color: #d4cafa;
+}
+
+/* Responsive Theme Button */
+
+@media (max-width: 650px) {
+  .sidebar__theme {
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .sidebar__theme-button {
+    width: auto;
+    padding: 0.6rem 1rem;
+  }
+}
+/* Theme toggle beside logo */
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar__theme {
+  display: none;
+}
+
+.sidebar__theme-button {
+  margin-right: auto;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid #e8e3f4;
+  border-radius: 12px;
+  background: #f7f4ff;
+  color: #7162c9;
+  transition: all 0.2s ease;
+}
+
+.sidebar__theme-button:hover {
+  transform: translateY(-2px);
+  background: #eeeaff;
+}
+
+.theme-dark .sidebar__theme-button {
+  background: #302d48;
+  border-color: #45405f;
+  color: #f2d58b;
+}
+
+.theme-dark .sidebar__theme-button:hover {
+  background: #3b3657;
+}
+
+.sidebar__theme-icon {
+  width: 21px;
+  height: 21px;
+}
